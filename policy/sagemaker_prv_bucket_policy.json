@@ -1,0 +1,34 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+       {
+            "Sid": "allow-sagemaker-to-write-access-logs",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": ${key_users}
+            },
+            "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionAcl",
+                "s3:PutObjectVersionTagging",
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "cloudwatch:PutMetricData",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:DescribeLogStreams",
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage"
+            ],
+            "Resource": [
+                "arn:aws:s3:::sagemaker-prv-log",
+                "arn:aws:s3:::sagemaker-prv-log/*" 
+            ]
+        }
+    ]
+}

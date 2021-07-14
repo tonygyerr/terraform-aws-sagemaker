@@ -1,0 +1,25 @@
+{
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": ${key_users}
+        },
+        "Action": "s3:*",
+        "Resource": ["arn:aws:s3:::app-ai-sagemaker-model-bucket", "arn:aws:s3:::app-ai-sagemaker-model-bucket/*"]
+      },
+      {
+        "Effect": "Deny",
+        "Principal": {
+          "AWS": ${key_users}
+        },
+        "Action": "s3:PutObject",
+        "Resource": "arn:aws:s3:::app-ai-sagemaker-model-bucket/*",
+        "Condition": {
+          "StringNotEquals": {
+            "s3:x-amz-acl": "bucket-owner-full-control"
+          }
+        }
+      }
+    ]
+  }
